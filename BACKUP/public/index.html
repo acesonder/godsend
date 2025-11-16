@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUTSINC - Outreach Someone In Need of Change</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Floating Action Buttons -->
+    <div class="floating-buttons">
+        <button id="loginBtn" class="floating-btn floating-btn-login" aria-label="Login">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            <span>Login</span>
+        </button>
+        <button id="reportBtn" class="floating-btn floating-btn-report" aria-label="Report an incident">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span>Report</span>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>OUTSINC</h1>
+                <p class="tagline">Meeting people where they're at, walking with them where they want to go</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#find-help">Find Help</a></li>
+                <li><a href="#engagement">Engagement</a></li>
+                <li><a href="#forum">Forum</a></li>
+                <li><a href="#elearning">eLearning</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2 class="hero-title">You Are Not Alone</h2>
+            <p class="hero-subtitle">
+                OUTSINC is a lived-experience–led support and navigation service that helps people facing homelessness, 
+                substance use, mental health challenges, and other life crises connect with the right resources, 
+                at the right time, in a way that feels safe and human.
+            </p>
+            <p class="hero-emphasis">
+                Lived experience. Real support. No wrong door.
+            </p>
+            <div class="hero-cta">
+                <a href="#self-referral" class="btn btn-primary btn-large">Find Help Now</a>
+                <a href="#self-referral" class="btn btn-secondary btn-large">Self-Refer</a>
+            </div>
+            <div class="crisis-banner">
+                <strong>In Crisis?</strong> Call 4 County Crisis: <a href="tel:1-866-995-9933">1-866-995-9933</a> | 
+                NORS: <a href="tel:1-877-688-6677">1-877-688-6677</a> | 
+                Emergency: <a href="tel:911">911</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About OUTSINC</h2>
+            <div class="about-intro">
+                <p>
+                    <strong>OUTSINC (Outreach Someone In Need of Change)</strong> was created by people who have lived it – 
+                    sleeping outside, navigating shelters, facing addiction, fighting for housing, and trying to make 
+                    sense of systems that often feel cold and confusing.
+                </p>
+                <p>
+                    We know what it's like to tell your story over and over and still not get the help you need. 
+                    We also know what a difference it makes when even one person shows up, listens without judgement, 
+                    and walks through the hard parts with you instead of talking down at you.
+                </p>
+                <p class="about-highlight">
+                    <strong>OUTSINC exists to be that kind of support.</strong>
+                </p>
+                <p>
+                    We are a community-based, peer-informed support and navigation service. Our team works alongside 
+                    people who are homeless, under-housed, using substances, dealing with mental health challenges, 
+                    or simply feeling stuck. We help you figure out what you want to work on next, what options are 
+                    available, and how to get there — step by step, at your pace.
+                </p>
+                <p class="about-emphasis">
+                    We are not here to "fix" you. We are here to stand with you.
+                </p>
+                <p>
+                    We partner with local services, outreach teams, shelters, hospitals, and community groups to make 
+                    it easier to move between systems without falling through the cracks. We also work with businesses, 
+                    neighbours, and community members who want to respond to visible homelessness, drug use, and crisis 
+                    with care instead of shame.
+                </p>
+                <p>
+                    OUTSINC is built on harm reduction, human rights, and the belief that everyone deserves dignity, 
+                    safety, and a place to belong — regardless of income, substance use, housing status, or what their 
+                    life looks like right now.
+                </p>
+            </div>
+
+            <div class="mission-vision-values">
+                <div class="about-card">
+                    <h3>Our Mission</h3>
+                    <p>
+                        To provide compassionate, person-centred support and navigation for people impacted by homelessness, 
+                        substance use, mental health challenges, poverty, and systemic barriers — meeting people where they are, 
+                        helping them define their own goals, and walking with them as they build safer, more stable, and more 
+                        hopeful lives.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <h3>Our Vision</h3>
+                    <p>We envision a community where:</p>
+                    <ul>
+                        <li>No one is left outside without options</li>
+                        <li>People can access help without shame, judgement, or impossible rules</li>
+                        <li>Lived and living experience is treated as expertise</li>
+                        <li>Systems work together instead of pushing people around</li>
+                        <li>Housing, health, safety, and belonging are treated as basic human rights</li>
+                    </ul>
+                </div>
+                <div class="about-card values-card">
+                    <h3>Our Core Values</h3>
+                    <div class="values-list">
+                        <div class="value-item">
+                            <strong>Person-Centred</strong> – You are the expert on your own life. We follow your priorities, 
+                            your pace, and your definition of "better."
+                        </div>
+                        <div class="value-item">
+                            <strong>Lived Experience at the Centre</strong> – Many of our team members and peers have been homeless, 
+                            used substances, or navigated the same systems. That experience shapes everything we do.
+                        </div>
+                        <div class="value-item">
+                            <strong>Harm Reduction</strong> – We support people who use substances in staying as safe as possible. 
+                            We don't require abstinence to offer help, and we don't give up on people because of use.
+                        </div>
+                        <div class="value-item">
+                            <strong>Accessibility</strong> – We remove barriers wherever we can: flexible contact options, 
+                            multiple ways to connect, plain language, mobile-friendly tools, and support for people who don't 
+                            have ID, phones, or stable addresses.
+                        </div>
+                        <div class="value-item">
+                            <strong>Self-Determination</strong> – You choose your goals. You can say yes, no, or "not right now." 
+                            We help you make informed choices, not choices for you.
+                        </div>
+                        <div class="value-item">
+                            <strong>Acceptance & Non-Judgement</strong> – We work with people in crisis, intoxicated, angry, tired, 
+                            hopeful, numb, or all of the above. You don't need to be "polite" to deserve help.
+                        </div>
+                        <div class="value-item">
+                            <strong>Collaboration</strong> – We don't replace existing services; we connect them. We work with 
+                            shelters, clinics, outreach teams, community groups, and local businesses to coordinate support.
+                        </div>
+                        <div class="value-item">
+                            <strong>Accountability & Transparency</strong> – We are clear about what we can and cannot do, what 
+                            information we collect, and how it's used. If we make a mistake, we own it and work to repair it.
+                        </div>
+                        <div class="value-item">
+                            <strong>Advocacy & Systems Change</strong> – Individual support matters, but so does changing the 
+                            conditions that keep people stuck. We share what we see with decision-makers, grounded in real stories 
+                            and data.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-info">
+                <p><strong>Serving Cobourg and Northumberland County</strong></p>
+                <p>We walk the streets you walk. We understand because we've been there.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Support Section -->
+    <section id="who-we-support" class="section section-highlight">
+        <div class="container">
+            <h2 class="section-title">Who We Support</h2>
+            <p class="section-intro">
+                OUTSINC supports people who are:
+            </p>
+            <div class="support-grid">
+                <div class="support-item">Sleeping outside, in tents, vehicles, or unsafe places</div>
+                <div class="support-item">Staying in shelters, motels, or constantly moving between couches</div>
+                <div class="support-item">Struggling with substance use, including opioids, stimulants, alcohol, or multiple substances</div>
+                <div class="support-item">Living with mental health challenges, trauma, or ongoing stress</div>
+                <div class="support-item">Dealing with violence, exploitation, or unsafe relationships</div>
+                <div class="support-item">Coping with grief, loss, or big life changes</div>
+                <div class="support-item">Facing barriers with ID, income, court, probation, child welfare, or school/work</div>
+                <div class="support-item">Just feeling overwhelmed, stuck, or unsure where to turn next</div>
+            </div>
+            <p class="support-message">
+                <strong>You do not need a diagnosis, a referral, or "the right words" to ask for help.</strong> 
+                If something in your life isn't working and you want support to change it — even a little — you're welcome here.
+            </p>
+        </div>
+    </section>
+
+    <!-- Find Help Section -->
+    <section id="find-help" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">What We Offer</h2>
+            
+            <!-- Navigation & One-to-One Support -->
+            <div class="program-section">
+                <h3 class="program-title">Navigation & One-to-One Support</h3>
+                <div class="help-options">
+                    <div class="help-card">
+                        <div class="help-icon">🧭</div>
+                        <h4>System Navigation & Advocacy</h4>
+                        <p>
+                            We help you understand what services exist (housing, detox, treatment, mental health, 
+                            legal, income, ID, family support, outreach, etc.) and how to access them.
+                        </p>
+                        <ul>
+                            <li>Help fill out forms and applications</li>
+                            <li>Go with you to appointments when possible</li>
+                            <li>Make calls or send emails with you or on your behalf</li>
+                            <li>Advocate when you're not being heard or taken seriously</li>
+                        </ul>
+                        <a href="#self-referral" class="btn btn-outline">Get Started</a>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">🎯</div>
+                        <h4>Goal Setting & Planning</h4>
+                        <p>
+                            We sit down with you — on the street, at a drop-in, over the phone, or online — and ask: 
+                            What would you like to see change in your life over the next days, weeks, or months?
+                        </p>
+                        <p>
+                            Together we build a realistic plan with small steps, backup plans, and check-ins that 
+                            match your actual life, not a textbook.
+                        </p>
+                        <a href="#self-referral" class="btn btn-outline">Get Started</a>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">📅</div>
+                        <h4>Ongoing Check-Ins</h4>
+                        <p>
+                            Support can be one-time or ongoing. We can check in regularly to see what's working, 
+                            what fell apart, and what needs to shift.
+                        </p>
+                        <p>
+                            <em>Life isn't linear; our support isn't either.</em>
+                        </p>
+                        <a href="#self-referral" class="btn btn-outline">Get Started</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Harm Reduction Support -->
+            <div class="program-section">
+                <h3 class="program-title">Harm Reduction Support</h3>
+                <div class="help-options">
+                    <div class="help-card">
+                        <div class="help-icon">💊</div>
+                        <h4>Supplies & Safer Use Support</h4>
+                        <p>
+                            We connect people with harm reduction supplies (e.g. safer use equipment, naloxone, 
+                            safer smoking/injection supplies) through outreach, partner agencies, and local programs.
+                        </p>
+                        <p>We focus on:</p>
+                        <ul>
+                            <li>Reducing overdose risk</li>
+                            <li>Reducing infections and injuries</li>
+                            <li>Keeping people as safe and informed as possible</li>
+                        </ul>
+                        <a href="#self-referral" class="btn btn-outline">Get Started</a>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">🚨</div>
+                        <h4>Overdose Prevention & Response</h4>
+                        <p>We offer:</p>
+                        <ul>
+                            <li>Education on overdose risks and warning signs</li>
+                            <li>Naloxone training and distribution through partners</li>
+                            <li>Support after an overdose, including connection to services if you're ready</li>
+                        </ul>
+                        <a href="#self-referral" class="btn btn-outline">Get Started</a>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">💬</div>
+                        <h4>Non-judgemental Conversations about Use</h4>
+                        <p>
+                            We talk openly about substance use without shaming or lecturing. If you want to reduce, 
+                            change, or stop using, we can help you explore options. If you're not ready or not interested, 
+                            we still care about your safety and wellbeing.
+                        </p>
+                        <a href="#self-referral" class="btn btn-outline">Get Started</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Housing, Income, and Practical Supports -->
+            <div class="program-section">
+                <h3 class="program-title">Housing, Income, and Practical Supports</h3>
+                <div class="help-options">
+                    <div class="help-card">
+                        <div class="help-icon">🏠</div>
+                        <h4>Housing Navigation</h4>
+                        <ul>
+                            <li>Help with housing applications, waitlists, and housing searches where possible</li>
+                            <li>Support with landlord communication and housing rights information</li>
+                            <li>Safety planning for people staying outside, couch-surfing, or in unsafe places</li>
+                        </ul>
+                        <a href="#self-referral" class="btn btn-outline">Get Started</a>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">💳</div>
+                        <h4>Income & ID Support</h4>
+                        <ul>
+                            <li>Help applying for or stabilizing income (social assistance, disability benefits, etc.)</li>
+                            <li>Support with replacing or obtaining ID (birth certificate, health card, etc.)</li>
+                            <li>Assistance reading letters and understanding deadlines so nothing gets missed</li>
+                        </ul>
+                        <a href="#self-referral" class="btn btn-outline">Get Started</a>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">🔧</div>
+                        <h4>Daily-Life Problem-Solving</h4>
+                        <p>
+                            Not everything fits in a program box. We can help with things like:
+                        </p>
+                        <ul>
+                            <li>Preparing for court dates or meetings with workers</li>
+                            <li>Organizing paperwork</li>
+                            <li>Breaking down overwhelming tasks into smaller, doable pieces</li>
+                        </ul>
+                        <a href="#self-referral" class="btn btn-outline">Get Started</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mental Health, Trauma, and Wellness Support -->
+            <div class="program-section">
+                <h3 class="program-title">Mental Health, Trauma, and Wellness Support</h3>
+                <p class="program-intro">
+                    We are not a crisis line or a replacement for professional therapy. We are:
+                </p>
+                <div class="help-options">
+                    <div class="help-card">
+                        <div class="help-icon">🧠</div>
+                        <h4>Support and Connection</h4>
+                        <ul>
+                            <li>A listening ear when you need to talk</li>
+                            <li>A safe space to process what's going on</li>
+                            <li>A bridge to other services that may be helpful</li>
+                        </ul>
+                        <p>We can help you:</p>
+                        <ul>
+                            <li>Explore coping strategies that might actually fit your life</li>
+                            <li>Talk about trauma, grief, and loss at your pace</li>
+                            <li>Connect to mental health supports (counselling, groups, crisis teams, peer programs) if and when you're ready</li>
+                            <li>Create personal safety and crisis plans</li>
+                        </ul>
+                        <a href="#self-referral" class="btn btn-outline">Get Started</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peer & Lived Experience Involvement -->
+            <div class="program-section">
+                <h3 class="program-title">Peer & Lived Experience Involvement</h3>
+                <p class="program-intro">
+                    <strong>OUTSINC is rooted in lived experience.</strong>
+                </p>
+                <div class="help-options">
+                    <div class="help-card">
+                        <div class="help-icon">🤝</div>
+                        <h4>Peer Involvement</h4>
+                        <p>
+                            People who have used services, lived outside, or navigated addiction and mental health 
+                            systems are involved in design, feedback, and delivery of our work.
+                        </p>
+                    </div>
+                    <div class="help-card">
+                        <div class="help-icon">✨</div>
+                        <h4>Opportunities to Contribute</h4>
+                        <p>
+                            As OUTSINC grows, we aim to create opportunities for people with lived/living experience to:
+                        </p>
+                        <ul>
+                            <li>Sit on advisory groups</li>
+                            <li>Help shape policies and programs</li>
+                            <li>Share stories (anonymously or by name, if they choose) to inform training and advocacy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Self-Referral Section -->
+    <section id="self-referral" class="section">
+        <div class="container">
+            <h2 class="section-title">Self-Refer</h2>
+            <p class="section-intro">
+                You can refer yourself for services. No one needs to refer you - you know what you need.
+                The process is simple, private, and respectful of your needs.
+            </p>
+            <div class="referral-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Share Your Information</h3>
+                    <p>Tell us about yourself and what kind of support you're looking for.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Create Your Account</h3>
+                    <p>Set up a secure account with a username and password.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Set Consent Preferences</h3>
+                    <p>Choose which agencies we can share your information with.</p>
+                </div>
+            </div>
+            <div class="referral-cta">
+                <button id="startReferralBtn" class="btn btn-primary btn-large">Start Your Referral</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business/Public Reporting -->
+    <section id="business-help" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Support for Businesses & Community Members</h2>
+            <p class="section-intro">
+                Visible homelessness and substance use can be hard on everyone. Businesses, neighbours, and 
+                community members often care deeply but feel stuck and unsure how to respond.
+            </p>
+            <p class="section-intro">
+                <strong>OUTSINC offers:</strong>
+            </p>
+            <div class="business-options">
+                <div class="business-card">
+                    <h3>Consultation & Support for Businesses</h3>
+                    <ul>
+                        <li>Guidance on responding to unsheltered people with dignity and safety</li>
+                        <li>Help creating compassionate policies for washrooms, loitering, and complaints</li>
+                        <li>De-escalation tips and harm reduction information</li>
+                        <li>A place to ask questions without being labelled "heartless" or "uncaring"</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">Contact Us</a>
+                </div>
+                <div class="business-card">
+                    <h3>Reporting & Follow-Up</h3>
+                    <p>
+                        A way to report concerns about tents, encampments, welfare checks, or discarded harm 
+                        reduction supplies, where those reports are handled with care for both safety and human dignity.
+                    </p>
+                    <p>Quick, confidential reporting for:</p>
+                    <ul>
+                        <li>Harm reduction supplies (needles, etc.)</li>
+                        <li>Welfare checks</li>
+                        <li>Abandoned belongings</li>
+                        <li>Encampments or tents</li>
+                        <li>Safety concerns</li>
+                    </ul>
+                    <button id="reportIncidentBtn" class="btn btn-primary">Submit a Report</button>
+                </div>
+                <div class="business-card">
+                    <h3>Training & Education</h3>
+                    <p>
+                        Workshops on homelessness, stigma, harm reduction, and trauma-informed practice for 
+                        businesses, schools, faith groups, and community organizations.
+                    </p>
+                    <a href="#elearning" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership & System Collaboration -->
+    <section id="partnerships" class="section">
+        <div class="container">
+            <h2 class="section-title">Partnership & System Collaboration</h2>
+            <p class="section-intro">
+                We don't work in isolation. OUTSINC collaborates with:
+            </p>
+            <div class="partnership-grid">
+                <div class="partnership-item">Outreach teams and peer programs</div>
+                <div class="partnership-item">Shelters and warming rooms</div>
+                <div class="partnership-item">Health and mental health services</div>
+                <div class="partnership-item">Harm reduction and addiction services</div>
+                <div class="partnership-item">Housing, income, and legal supports</div>
+                <div class="partnership-item">Community groups, churches, and grassroots initiatives</div>
+                <div class="partnership-item">Local government and service planners when appropriate</div>
+            </div>
+            <p class="section-intro" style="margin-top: 2rem;">
+                Our role is to share what we're hearing and seeing on the ground, help connect the dots between 
+                services, and advocate for changes that reduce barriers instead of adding new ones.
+            </p>
+            <div class="partner-cta">
+                <h3>Become a Partner</h3>
+                <p>
+                    Businesses, agencies, and organizations can partner with us to create more compassionate 
+                    community responses.
+                </p>
+                <a href="#partner-form" class="btn btn-primary">Partner With Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engagement Section -->
+    <section id="engagement" class="section">
+        <div class="container">
+            <h2 class="section-title">Get Involved</h2>
+            <div class="engagement-grid">
+                <div class="engagement-card">
+                    <h3>Events</h3>
+                    <p>Community lunches, harm reduction pop-ups, training sessions, and empathy workshops.</p>
+                    <a href="#events" class="btn btn-outline">View Events</a>
+                </div>
+                <div class="engagement-card">
+                    <h3>Impact Updates</h3>
+                    <p>Monthly updates on the people we've helped house, crisis calls answered, and community impact.</p>
+                    <a href="#news" class="btn btn-outline">Read Updates</a>
+                </div>
+                <div class="engagement-card">
+                    <h3>Donate</h3>
+                    <p>Help us provide essential items: sleeping bags, bus passes, food cards, and more.</p>
+                    <a href="#donate" class="btn btn-primary">Donate Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forum Section -->
+    <section id="forum" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Forum & Support</h2>
+            <div class="forum-options">
+                <div class="forum-card">
+                    <h3>📝 Blog & Stories</h3>
+                    <p>Share your story or read others' experiences (all reviewed for privacy).</p>
+                    <a href="#blog" class="btn btn-outline">Visit Blog</a>
+                </div>
+                <div class="forum-card">
+                    <h3>💬 Live Chat</h3>
+                    <p>Quick questions? Chat with us during limited hours.</p>
+                    <button class="btn btn-outline" disabled>Coming Soon</button>
+                </div>
+                <div class="forum-card">
+                    <h3>❓ FAQ</h3>
+                    <p>Frequently asked questions about our services, boundaries, and confidentiality.</p>
+                    <a href="#faq" class="btn btn-outline">View FAQ</a>
+                </div>
+                <div class="forum-card">
+                    <h3>✉️ Ask a Question</h3>
+                    <p>Submit a question and we'll respond by email or phone.</p>
+                    <a href="#qa" class="btn btn-outline">Ask Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- eLearning Section -->
+    <section id="elearning" class="section">
+        <div class="container">
+            <h2 class="section-title">eLearning & Resources</h2>
+            <p class="section-intro">
+                Educational resources for businesses, volunteers, families, and anyone wanting to learn
+                more about supporting people experiencing homelessness and substance use.
+            </p>
+            <div class="elearning-categories">
+                <div class="elearning-card">
+                    <h3>Toolkits</h3>
+                    <ul>
+                        <li>How to respond to an overdose</li>
+                        <li>Talking to someone sleeping in your storefront</li>
+                        <li>Navigating housing services</li>
+                    </ul>
+                    <a href="#toolkits" class="btn btn-outline">View Toolkits</a>
+                </div>
+                <div class="elearning-card">
+                    <h3>Guides & How-To's</h3>
+                    <ul>
+                        <li>Getting ID back</li>
+                        <li>Applying for ODSP</li>
+                        <li>Safety planning</li>
+                    </ul>
+                    <a href="#guides" class="btn btn-outline">View Guides</a>
+                </div>
+                <div class="elearning-card">
+                    <h3>Courses</h3>
+                    <ul>
+                        <li>Harm Reduction 101 (for volunteers)</li>
+                        <li>Responding with dignity (for businesses)</li>
+                        <li>Supporting loved ones (for families)</li>
+                    </ul>
+                    <a href="#courses" class="btn btn-outline">Browse Courses</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>OUTSINC</h3>
+                    <p><em>Outreach Someone In Need of Change</em></p>
+                    <p>Serving Cobourg and Northumberland County</p>
+                    <p class="footer-tagline">Lived experience. Real support. No wrong door.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#find-help">Find Help</a></li>
+                        <li><a href="#self-referral">Self-Refer</a></li>
+                        <li><a href="#business-help">Business Reporting</a></li>
+                        <li><a href="#engagement">Get Involved</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#elearning">eLearning</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#forum">Forum</a></li>
+                        <li><a href="#events">Events</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Crisis Support</h4>
+                    <ul>
+                        <li>4 County Crisis: <a href="tel:1-866-995-9933">1-866-995-9933</a></li>
+                        <li>NORS: <a href="tel:1-877-688-6677">1-877-688-6677</a></li>
+                        <li>Emergency: <a href="tel:911">911</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 OUTSINC. All rights reserved.</p>
+                <p class="privacy-note">
+                    Your privacy matters. We follow strict confidentiality guidelines.
+                    <a href="#privacy">Learn more about our privacy practices</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals will be inserted here by JavaScript -->
+    <div id="modal-container"></div>
+
+    <script src="/app.js"></script>
+</body>
+</html>
