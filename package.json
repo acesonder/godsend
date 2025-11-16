@@ -1,0 +1,34 @@
+{
+  "name": "outsinc",
+  "version": "1.0.0",
+  "description": "OUTSINC - Lived-experience-led support and navigation service for people facing homelessness, substance use, and mental health challenges",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "outreach",
+    "harm-reduction",
+    "homelessness",
+    "mental-health",
+    "substance-use",
+    "case-management",
+    "peer-support"
+  ],
+  "author": "OUTSINC",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-validator": "^7.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
