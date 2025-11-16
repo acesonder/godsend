@@ -64,9 +64,13 @@ app.get('/api', (req, res) => {
   });
 });
 
-// Serve index.html for all non-API routes (SPA support)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+// Catch-all route - serve index.html for non-API routes
+app.use((req, res, next) => {
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+  } else {
+    next();
+  }
 });
 
 // Error handling middleware
