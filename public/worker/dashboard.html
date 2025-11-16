@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Dashboard - OUTSINC</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .stat-label {
+            color: var(--text-medium);
+            margin-top: 0.5rem;
+        }
+        .dashboard-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        .dashboard-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .reports-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .reports-table th,
+        .reports-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .reports-table th {
+            background: var(--bg-light);
+            font-weight: 600;
+        }
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .status-new {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .status-in-progress {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .status-completed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <h1><a href="/" style="color: inherit; text-decoration: none;">OUTSINC</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/worker/dashboard.html">Dashboard</a></li>
+                <li><a href="/worker/clients.html">Clients</a></li>
+                <li><a href="/worker/reports.html">Reports</a></li>
+                <li><a href="/" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h2>Worker Dashboard</h2>
+            <p>Welcome, <span id="userName">Worker</span></p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="activeClientsCount">--</div>
+                <div class="stat-label">Active Clients</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="pendingTasksCount">--</div>
+                <div class="stat-label">Pending Tasks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="newReportsCount">--</div>
+                <div class="stat-label">New Reports</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="upcomingApptsCount">--</div>
+                <div class="stat-label">Upcoming Appointments</div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Quick Actions</h3>
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="alert('New client intake coming soon')">
+                    New Client Intake
+                </button>
+                <button class="btn btn-outline" onclick="alert('Case notes feature coming soon')">
+                    Add Case Note
+                </button>
+                <button class="btn btn-outline" onclick="alert('Task creation coming soon')">
+                    Create Task
+                </button>
+                <button class="btn btn-outline" onclick="alert('Client search coming soon')">
+                    Search Clients
+                </button>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Recent Incident Reports</h3>
+            <div id="reportsContainer">
+                <p>Loading incident reports...</p>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Upcoming Events</h3>
+            <div id="eventsContainer">
+                <p>Loading events...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = window.location.origin + '/api';
+        const token = localStorage.getItem('authToken');
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+        // Check if logged in as worker or admin
+        if (!token || !user || (user.role !== 'worker' && user.role !== 'admin')) {
+            alert('Access denied. Please log in as a worker or admin.');
+            window.location.href = '/';
+        }
+
+        // Display user name
+        if (user.first_name) {
+            document.getElementById('userName').textContent = user.first_name;
+        }
+
+        // Logout handler
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('user');
+            window.location.href = '/';
+        });
+
+        // Load incident reports
+        async function loadReports() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/incident-reports`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const data = await response.json();
+                
+                const reportsDiv = document.getElementById('reportsContainer');
+                if (data.reports && data.reports.length > 0) {
+                    // Update stats
+                    const newReports = data.reports.filter(r => r.status === 'new');
+                    document.getElementById('newReportsCount').textContent = newReports.length;
+
+                    reportsDiv.innerHTML = `
+                        <table class="reports-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.reports.slice(0, 5).map(report => `
+                                    <tr>
+                                        <td>${report.report_type.replace(/_/g, ' ')}</td>
+                                        <td>${report.location}</td>
+                                        <td><span class="status-badge status-${report.status.replace('_', '-')}">${report.status}</span></td>
+                                        <td>${new Date(report.created_at).toLocaleDateString()}</td>
+                                        <td><button class="btn btn-outline btn-small" onclick="alert('Report details coming soon')">View</button></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                } else {
+                    document.getElementById('newReportsCount').textContent = '0';
+                    reportsDiv.innerHTML = '<p style="color: var(--text-medium);">No incident reports</p>';
+                }
+            } catch (error) {
+                console.error('Error loading reports:', error);
+                document.getElementById('reportsContainer').innerHTML = '<p style="color: var(--error-color);">Error loading reports</p>';
+                document.getElementById('newReportsCount').textContent = '0';
+            }
+        }
+
+        // Load events
+        async function loadEvents() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/events`);
+                const data = await response.json();
+                
+                const eventsDiv = document.getElementById('eventsContainer');
+                if (data.events && data.events.length > 0) {
+                    eventsDiv.innerHTML = `
+                        <div style="display: grid; gap: 1rem;">
+                            ${data.events.slice(0, 3).map(event => `
+                                <div style="padding: 1rem; background: var(--bg-light); border-radius: 4px;">
+                                    <strong>${event.title}</strong><br>
+                                    <small>${new Date(event.start_datetime).toLocaleString()}</small><br>
+                                    <small>${event.location || 'Location TBD'}</small>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    eventsDiv.innerHTML = '<p style="color: var(--text-medium);">No upcoming events</p>';
+                }
+            } catch (error) {
+                document.getElementById('eventsContainer').innerHTML = '<p style="color: var(--text-medium);">No events available</p>';
+            }
+        }
+
+        // Set placeholder stats
+        document.getElementById('activeClientsCount').textContent = '--';
+        document.getElementById('pendingTasksCount').textContent = '--';
+        document.getElementById('upcomingApptsCount').textContent = '--';
+
+        // Load data
+        loadReports();
+        loadEvents();
+    </script>
+</body>
+</html>

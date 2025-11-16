@@ -614,6 +614,169 @@ class SelfReferralFlow {
 
 const selfReferral = new SelfReferralFlow();
 
+// Q&A Submission Modal
+function showQAModal() {
+    const content = `
+        <form id="qaForm">
+            <p style="margin-bottom: 1.5rem; color: var(--text-medium);">
+                Have a question? Submit it here and we'll respond via email or phone if you provide contact information.
+            </p>
+            
+            <div class="form-group">
+                <label class="form-label" for="qaQuestion">Your Question *</label>
+                <textarea id="qaQuestion" class="form-textarea" rows="5" required
+                          placeholder="What would you like to know?"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="qaName">Your Name (optional)</label>
+                <input type="text" id="qaName" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="qaEmail">Your Email (optional)</label>
+                <input type="email" id="qaEmail" class="form-input">
+                <small class="form-help">We'll send our answer to this email</small>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="qaPhone">Your Phone (optional)</label>
+                <input type="tel" id="qaPhone" class="form-input">
+            </div>
+
+            <div id="qaError" class="form-error" style="display: none;"></div>
+            <div id="qaSuccess" style="display: none; color: var(--success-color); margin-bottom: 1rem;"></div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Question</button>
+        </form>
+    `;
+
+    const modal = modalManager.open('Ask a Question', content);
+
+    const form = modal.querySelector('#qaForm');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = {
+            question: $('#qaQuestion').value,
+            name: $('#qaName').value || null,
+            email: $('#qaEmail').value || null,
+            phone: $('#qaPhone').value || null
+        };
+
+        const errorDiv = $('#qaError');
+        const successDiv = $('#qaSuccess');
+
+        try {
+            const data = await api.post('/qa/submit', formData);
+            
+            successDiv.textContent = data.message;
+            successDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+            
+            form.reset();
+            
+            setTimeout(() => {
+                modalManager.closeAll();
+            }, 3000);
+        } catch (error) {
+            errorDiv.textContent = error.message;
+            errorDiv.style.display = 'block';
+            successDiv.style.display = 'none';
+        }
+    });
+}
+
+// Partner Application Modal
+function showPartnerModal() {
+    const content = `
+        <form id="partnerForm">
+            <p style="margin-bottom: 1.5rem; color: var(--text-medium);">
+                Interested in partnering with OUTSINC? Fill out this form and we'll get in touch.
+            </p>
+            
+            <div class="form-group">
+                <label class="form-label" for="partnerOrgName">Organization Name *</label>
+                <input type="text" id="partnerOrgName" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="partnerOrgType">Organization Type *</label>
+                <select id="partnerOrgType" class="form-select" required>
+                    <option value="">Select...</option>
+                    <option value="agency">Agency/Service Provider</option>
+                    <option value="church">Church/Faith Organization</option>
+                    <option value="business">Business</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="partnerContactName">Contact Name *</label>
+                <input type="text" id="partnerContactName" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="partnerContactEmail">Contact Email *</label>
+                <input type="email" id="partnerContactEmail" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="partnerContactPhone">Contact Phone</label>
+                <input type="tel" id="partnerContactPhone" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="partnerMessage">Tell us about your interest in partnering</label>
+                <textarea id="partnerMessage" class="form-textarea" rows="5"
+                          placeholder="What would you like to collaborate on?"></textarea>
+            </div>
+
+            <div id="partnerError" class="form-error" style="display: none;"></div>
+            <div id="partnerSuccess" style="display: none; color: var(--success-color); margin-bottom: 1rem;"></div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Application</button>
+        </form>
+    `;
+
+    const modal = modalManager.open('Partner With Us', content);
+
+    const form = modal.querySelector('#partnerForm');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = {
+            organization_name: $('#partnerOrgName').value,
+            organization_type: $('#partnerOrgType').value,
+            contact_name: $('#partnerContactName').value,
+            contact_email: $('#partnerContactEmail').value,
+            contact_phone: $('#partnerContactPhone').value || null,
+            message: $('#partnerMessage').value || null
+        };
+
+        const errorDiv = $('#partnerError');
+        const successDiv = $('#partnerSuccess');
+
+        try {
+            const data = await api.post('/partners/apply', formData);
+            
+            successDiv.textContent = data.message;
+            successDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+            
+            form.reset();
+            
+            setTimeout(() => {
+                modalManager.closeAll();
+            }, 3000);
+        } catch (error) {
+            errorDiv.textContent = error.message;
+            errorDiv.style.display = 'block';
+            successDiv.style.display = 'none';
+        }
+    });
+}
+
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
     // Floating button handlers
@@ -638,6 +801,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (reportIncidentBtn) {
         reportIncidentBtn.addEventListener('click', showReportModal);
     }
+
+    // Q&A submission - find all links to #qa
+    document.querySelectorAll('a[href="#qa"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            showQAModal();
+        });
+    });
+
+    // Partner application - find all links to #partner-form
+    document.querySelectorAll('a[href="#partner-form"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPartnerModal();
+        });
+    });
 
     // Mobile menu toggle
     const mobileMenuToggle = $('.mobile-menu-toggle');

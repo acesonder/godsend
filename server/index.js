@@ -20,6 +20,12 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/self-referral', require('./routes/selfReferral'));
 app.use('/api/incident-reports', require('./routes/incidentReports'));
+app.use('/api/faq', require('./routes/faq'));
+app.use('/api/qa', require('./routes/qa'));
+app.use('/api/events', require('./routes/events'));
+app.use('/api/posts', require('./routes/posts'));
+app.use('/api/courses', require('./routes/courses'));
+app.use('/api/partners', require('./routes/partners'));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -59,6 +65,34 @@ app.get('/api', (req, res) => {
         update: 'PUT /api/incident-reports/:id',
         assign: 'POST /api/incident-reports/:id/assign',
         stats: 'GET /api/incident-reports/stats'
+      },
+      faq: {
+        getAll: 'GET /api/faq',
+        getByCategory: 'GET /api/faq/category/:category',
+        getOne: 'GET /api/faq/:id'
+      },
+      qa: {
+        submit: 'POST /api/qa/submit'
+      },
+      events: {
+        getUpcoming: 'GET /api/events',
+        getOne: 'GET /api/events/:id',
+        register: 'POST /api/events/:id/register'
+      },
+      posts: {
+        getAll: 'GET /api/posts',
+        getByType: 'GET /api/posts/type/:type',
+        getOne: 'GET /api/posts/:id'
+      },
+      courses: {
+        getAll: 'GET /api/courses',
+        getByType: 'GET /api/courses/type/:type',
+        getOne: 'GET /api/courses/:id',
+        updateProgress: 'POST /api/courses/:id/progress (auth required)',
+        getMyProgress: 'GET /api/courses/:id/my-progress (auth required)'
+      },
+      partners: {
+        apply: 'POST /api/partners/apply'
       }
     }
   });

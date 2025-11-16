@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard - OUTSINC</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .dashboard-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .dashboard-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .profile-info {
+            display: grid;
+            gap: 0.75rem;
+        }
+        .profile-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .profile-row:last-child {
+            border-bottom: none;
+        }
+        .consent-list {
+            list-style: none;
+            padding: 0;
+        }
+        .consent-item {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: var(--bg-light);
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-small {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <h1><a href="/" style="color: inherit; text-decoration: none;">OUTSINC</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/client/dashboard.html">Dashboard</a></li>
+                <li><a href="/" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h2>Welcome, <span id="userName">Client</span></h2>
+            <p>Your personal OUTSINC dashboard</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Your Profile</h3>
+                <div id="profileInfo" class="profile-info">
+                    <p>Loading profile information...</p>
+                </div>
+                <button class="btn btn-outline" style="margin-top: 1rem; width: 100%;" onclick="alert('Profile editing coming soon')">
+                    Edit Profile
+                </button>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Consent Preferences</h3>
+                <p style="font-size: 0.875rem; color: var(--text-medium); margin-bottom: 1rem;">
+                    You control who can access your information
+                </p>
+                <div id="consentsList">
+                    <p>Loading consents...</p>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Quick Actions</h3>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <button class="btn btn-primary" onclick="alert('Messaging feature coming soon')">
+                        Message Your Worker
+                    </button>
+                    <button class="btn btn-outline" onclick="alert('Appointment booking coming soon')">
+                        Book Appointment
+                    </button>
+                    <button class="btn btn-outline" onclick="window.location.href='/client/resources.html'">
+                        Browse Resources
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Upcoming Events</h3>
+                <div id="eventsList">
+                    <p>Loading events...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Available eLearning Courses</h3>
+            <div id="coursesList">
+                <p>Loading courses...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = window.location.origin + '/api';
+        const token = localStorage.getItem('authToken');
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+        // Check if logged in
+        if (!token || !user || user.role !== 'client') {
+            alert('Please log in to access the dashboard');
+            window.location.href = '/';
+        }
+
+        // Display user name
+        if (user.first_name) {
+            document.getElementById('userName').textContent = user.first_name;
+        }
+
+        // Logout handler
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('user');
+            window.location.href = '/';
+        });
+
+        // Fetch and display profile
+        async function loadProfile() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const data = await response.json();
+                
+                const profileDiv = document.getElementById('profileInfo');
+                profileDiv.innerHTML = `
+                    <div class="profile-row">
+                        <span><strong>Name:</strong></span>
+                        <span>${data.user.first_name} ${data.user.last_name}</span>
+                    </div>
+                    <div class="profile-row">
+                        <span><strong>Email:</strong></span>
+                        <span>${data.user.email || 'Not provided'}</span>
+                    </div>
+                    <div class="profile-row">
+                        <span><strong>Phone:</strong></span>
+                        <span>${data.user.phone || 'Not provided'}</span>
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('profileInfo').innerHTML = '<p style="color: var(--error-color);">Error loading profile</p>';
+            }
+        }
+
+        // Fetch and display events
+        async function loadEvents() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/events`);
+                const data = await response.json();
+                
+                const eventsDiv = document.getElementById('eventsList');
+                if (data.events && data.events.length > 0) {
+                    eventsDiv.innerHTML = data.events.slice(0, 3).map(event => `
+                        <div style="padding: 0.75rem; margin-bottom: 0.5rem; background: var(--bg-light); border-radius: 4px;">
+                            <strong>${event.title}</strong><br>
+                            <small>${new Date(event.start_datetime).toLocaleDateString()}</small>
+                        </div>
+                    `).join('');
+                } else {
+                    eventsDiv.innerHTML = '<p style="color: var(--text-medium);">No upcoming events</p>';
+                }
+            } catch (error) {
+                document.getElementById('eventsList').innerHTML = '<p style="color: var(--text-medium);">No events available</p>';
+            }
+        }
+
+        // Fetch and display courses
+        async function loadCourses() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/courses`);
+                const data = await response.json();
+                
+                const coursesDiv = document.getElementById('coursesList');
+                if (data.all && data.all.length > 0) {
+                    coursesDiv.innerHTML = `
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem;">
+                            ${data.all.slice(0, 4).map(course => `
+                                <div style="padding: 1rem; background: var(--bg-light); border-radius: 4px;">
+                                    <h4 style="margin-top: 0;">${course.title}</h4>
+                                    <p style="font-size: 0.875rem; color: var(--text-medium);">${course.description || ''}</p>
+                                    <button class="btn btn-outline btn-small" onclick="alert('Course viewer coming soon')">
+                                        Start Course
+                                    </button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    coursesDiv.innerHTML = '<p style="color: var(--text-medium);">No courses available yet</p>';
+                }
+            } catch (error) {
+                document.getElementById('coursesList').innerHTML = '<p style="color: var(--text-medium);">No courses available</p>';
+            }
+        }
+
+        // Load consents placeholder
+        document.getElementById('consentsList').innerHTML = `
+            <p style="font-size: 0.875rem; color: var(--text-medium);">
+                Consent management coming soon. You'll be able to manage which agencies can access your information.
+            </p>
+        `;
+
+        // Load data
+        loadProfile();
+        loadEvents();
+        loadCourses();
+    </script>
+</body>
+</html>
